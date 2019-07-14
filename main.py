@@ -1,6 +1,11 @@
-from roller import roll, show_rolls, rolls
+"""
+    Author: KardasR
 
-"""Main file for Dice Roller 2."""
+    Main file for Dice Roller 2.
+"""
+
+from roller import roll, rolls, show_rolls
+from visual import visualize
 
 while True:
     sides = int(input("What sided dice would you like to roll? (Press 0 to exit)\n"))
@@ -10,10 +15,10 @@ while True:
     
     num_dice = int(input("How many dice would you like to roll?\n"))
 
+    output = roll(sides, num_dice)
+
     # Check for a critical.
     if(sides == 20 and num_dice == 1):
-        output = roll(sides, num_dice)
-
         if(output == 20):
             print("Critical Success!")
         elif(output == 1):
@@ -21,8 +26,7 @@ while True:
 
         print(output)
 
-    else:
-        print(roll(sides, num_dice))
+    print(output)
 
     show_die = input("Would you like to see your individual rolls? (y / n)\n")
 
@@ -31,6 +35,11 @@ while True:
         break
 
     print(show_rolls(num_dice))
+
+    # Visualize the rolls.
+    vis_rolls = input("Would you like to visualize your rolls? (y / n)\n")
+    if(vis_rolls == 'y'):
+        visualize(num_dice, sides, output, rolls)
 
     # Empties the rolls list to avoid answers accumulating in the list.
     rolls.clear()
